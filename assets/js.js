@@ -50,6 +50,10 @@ var questions = [
     clearInterval(intervalId);
     var body = document.body;
     body.innerHTML = "Game over, You scored " + correctCount;
+    if (correctCount > highScore) {
+      localStorage.setItem('player', correctCount);
+      localStorage.setItem('highScore', correctCount);
+    }
   }
     //stopping the quiz on timout
   function updateTime() {
@@ -62,7 +66,7 @@ var questions = [
   // no more questions when tim is zero
   // same functio also gives questions
   function renderQuestion() {
-    
+    initials = prompt("Welcome to the blade runner quiz. Your time will start once you enter your initials");
     if (time == 0) {
       updateTime();
       return;
@@ -111,3 +115,8 @@ var questions = [
   
   renderQuestion();
   optionListEl.addEventListener("click", checkAnswer);
+
+
+  localStorage.setItem('player', initials);
+  localStorage.setItem('highScore', correctCount);
+  console.log(localStorage.player);
