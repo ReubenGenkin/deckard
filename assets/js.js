@@ -9,7 +9,7 @@ var questions = [
     {
         question:
             "The ending monologue said by Roy Batty starts with...",
-        choices: ["Like tears in rain", "I've seen things you people wouldn't belive", "Time to die", "Does she know"],
+        choices: ["Like tears in rain", "I've seen things you people wouldn't believe", "Time to die", "Does she know"],
         answer: "I've seen things you people wouldn't belive",
     },
     {
@@ -48,11 +48,19 @@ var questions = [
 
   function endQuiz() {
     clearInterval(intervalId);
-    var body = document.body;
-    body.innerHTML = "Game over, You scored " + correctCount;
-    if (correctCount > highScore) {
-      localStorage.setItem('player', correctCount);
+    localStorage.setItem('newScore', correctCount);
+    if (localStorage.getItem('newScore') > localStorage.getItem('highScore')) {
+      winInitials = initials;
+      winCount = correctCount;
+      localStorage.setItem('player', winInitials);
       localStorage.setItem('highScore', correctCount);
+      var body = document.body;
+      body.classList.add("body-class");
+      body.innerHTML = "Game over, You scored " + correctCount + "." + " You have the new high score!";
+    } else {
+      var body = document.body;
+      body.classList.add("body-class");
+      body.innerHTML = "Game over, You scored " + correctCount + "." + " You loose to " + localStorage.getItem('player');
     }
   }
     //stopping the quiz on timout
@@ -66,10 +74,16 @@ var questions = [
   // no more questions when tim is zero
   // same functio also gives questions
   function renderQuestion() {
-    initials = prompt("Welcome to the blade runner quiz. Your time will start once you enter your initials");
+    
     if (time == 0) {
       updateTime();
       return;
+    } else if (time == 70) {
+      initials = "";
+      initials = prompt("Welcome to the blade runner quiz. Your time will start once you enter your initials");
+      localStorage.setItem('newPlayer', initials);
+      localStorage.setItem('newScore', correctCount);
+    
     }
   
     intervalId = setInterval(updateTime, 1000);
@@ -116,7 +130,5 @@ var questions = [
   renderQuestion();
   optionListEl.addEventListener("click", checkAnswer);
 
-
-  localStorage.setItem('player', initials);
-  localStorage.setItem('highScore', correctCount);
-  console.log(localStorage.player);
+  winInitials = "";
+  winCount = "";

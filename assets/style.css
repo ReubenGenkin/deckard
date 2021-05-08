@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace, sans-serif;
     line-height: 1.5;
+    color: white;
 }
 
 html {
@@ -121,4 +122,14 @@ ul li {
     font-size: 24px;
     color: white;
 
+}
+
+.body-class {
+    width: 80%;
+    margin: 40px auto;
+    padding: 10px;
+    font-size: 40px;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
 }
