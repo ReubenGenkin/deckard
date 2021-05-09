@@ -61,8 +61,10 @@ h2 {
 /* timer styles*/
 
 h2 {
+    font-size: 24px;
     color: white;
-    -webkit-text-stroke: 1px #ffd5f4;
+    font-weight: lighter;
+    -webkit-text-stroke: 1px #ffe9f9;
 }
 
 #timer {
@@ -71,12 +73,20 @@ h2 {
     position: absolute;
     left: 0;
     color: #ff00bb;
-    margin: 32px 0 auto 16px;
+    margin: 32px 0 auto 32px;
     background-color:rgba(0, 0, 0, 0.5);
     border-radius: 50%;
     padding: 0 8px;
 	font-size: 40px;
 	-webkit-text-stroke: 1px white;
+}
+
+#timer-title {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 16px;
+    display: inline;
+    left: 0;
 }
 
 /* Flex */
@@ -132,4 +142,32 @@ ul li {
     border: 1px solid white;
     border-radius: 5px;
     text-align: center;
+}
+
+
+.content-class {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.input-div {
+    margin: 16px 0;
+}
+
+.input-start {
+    width: 300px;
+    height: 30px;
+    padding: none;
+    color: black;
+    border: 1px solid #ff00bb;
+    border-radius: 5px;
+}
+
+.start-button {
+    width: 64px;
+    height: 32px;
+    color: black;
+    border: 1px solid #ff00bb;
+    border-radius: 5px;
+    padding: 0 8px;
 }
