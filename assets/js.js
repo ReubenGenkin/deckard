@@ -70,33 +70,49 @@ function endQuiz() {
     localStorage.setItem('player', winInitials);
     localStorage.setItem('topScore', correctCount);
 
-    var headEnd = document.createElement('h2');
+    headEnd = document.createElement('h2');
     headEnd.classList.add("end-title");
     headEnd.textContent = "Game over, You scored " + winCount + "." + " You have the new high score!";;
     contentEl.appendChild(headEnd);
     return;
+
   } else if (correctCount == localStorage.getItem('topScore')) {
     endClear();
 
-    var headEnd = document.createElement('h2');
+    headEnd = document.createElement('h2');
     headEnd.classList.add("end-title");
     headEnd.textContent = "You've tied for top score";;
     contentEl.appendChild(headEnd);
   } else {
     endClear();
 
-    var headEnd = document.createElement('h2');
+    headEnd = document.createElement('h2');
     headEnd.classList.add("end-title");
     headEnd.textContent = "Game over, You scored " + correctCount + "." + " You loose to " + localStorage.getItem('player');
     contentEl.appendChild(headEnd);
+
+    paraEnd = document.createElement('p');
+    paraEnd.classList.add("para-start");
+    paraEnd.textContent = "Click the button to retake the quiz";
+    contentEl.appendChild(paraEnd);
+
+    endButton = document.createElement('button');
+    endButton.classList.add("start-button");
+    endButton.setAttribute("id", "end-button");
+    endButton.textContent = "retake";
+    contentEl.appendChild(endButton);
+
+    restart = endButton.querySelector("#end-button");
+    endButton.addEventListener("click", clearEnd);
+    endButton.addEventListener("click", preQuiz);
+    
   }
+}
 
-  // if (input) {
-  // localStorage.setItem('newPlayer', initials);
-  // localStorage.setItem('newScore', correctCount);
-  // checkScore123();}
-
-
+function clearEnd() {
+  endButton.remove();
+  paraEnd.remove();
+  headEnd.remove();
 }
 //stopping the quiz on timout
 function updateTime() {
@@ -139,7 +155,7 @@ function nextQuestion() {
   questionIndex++;
   if (questionIndex === questions.length) {
     time = 0;
-    
+
   }
   renderQuestion();
 }
@@ -201,7 +217,7 @@ function preQuiz() {
 
   buttStart = document.createElement('button');
   buttStart.classList.add("start-button");
-  content.setAttribute("id", "start-button");
+  buttStart.setAttribute("id", "start-button");
   buttStart.textContent = "Start";
   buttonDiv.append(buttStart);
 
@@ -209,7 +225,7 @@ function preQuiz() {
   buttStart.addEventListener("click", renderQuestion);
   buttStart.addEventListener("click", clear);
   buttStart.addEventListener("click", storeStart);
-  
+
 }
 
 function clear() {

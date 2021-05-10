@@ -183,4 +183,6 @@ ul li {
 
 .end-title {
     width: 80%;
+    margin-top: 16px;
+    text-align: center;
 }
