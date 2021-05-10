@@ -55,16 +55,11 @@ header {
 }
 
 h2 {
-    display: inline;
-}
-
-/* timer styles*/
-
-h2 {
     font-size: 24px;
     color: white;
     font-weight: lighter;
     -webkit-text-stroke: 1px #ffe9f9;
+    display: inline;
 }
 
 #timer {
@@ -89,12 +84,6 @@ h2 {
     left: 0;
 }
 
-/* Flex */
-
-.flex-question {
-    text-align: center;
-
-}
 
 #question {
     font-size: 24px;
@@ -167,7 +156,31 @@ ul li {
     width: 64px;
     height: 32px;
     color: black;
-    border: 1px solid #ff00bb;
+    border: 1px solid white;
     border-radius: 5px;
     padding: 0 8px;
+}
+
+.start-button:hover {
+    border: 1px solid #ff00bb;
+}
+
+.start-button:active {
+    border: 1px solid #ff00bb;
+    background-color: rgba(255, 255, 255, 0.808);
+}
+
+.para-start {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    font-size: 24px;
+}
+
+.content-end {
+    width: 80%;
+}
+
+.end-title {
+    width: 80%;
 }

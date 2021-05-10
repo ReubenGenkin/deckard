@@ -10,7 +10,7 @@ var questions = [
     question:
       "The ending monologue said by Roy Batty starts with...",
     choices: ["Like tears in rain", "I've seen things you people wouldn't believe", "Time to die", "Does she know"],
-    answer: "I've seen things you people wouldn't belive",
+    answer: "I've seen things you people wouldn't believe",
   },
   {
     question: "What is the Tyrell Corp motto?",
@@ -33,10 +33,13 @@ var questions = [
 
 
 // selecting the html elements thats being manipulated
+var contentEl = document.querySelector("#content");
+var timerTitleEl = document.querySelector("#timer-title");
 var questionEl = document.querySelector("#question");
 var optionListEl = document.querySelector("#option-list");
 var questionResultEl = document.querySelector("#question-result");
 var timerEl = document.querySelector("#timer");
+var player = "";
 
 // keeping track of score and what question were on
 var questionIndex = 0;
@@ -46,30 +49,46 @@ var correctCount = 0;
 var time = 70;
 var intervalId;
 
+function endClear() {
+  questionEl.remove();
+  optionListEl.remove();
+  questionResultEl.remove();
+  timerEl.remove();
+  timerTitleEl.remove();
+}
 
 function endQuiz() {
   clearInterval(intervalId);
 
+  if (correctCount > localStorage.getItem('topScore')) {
 
+    endClear();
 
-
-  if (correctCount > localStorage.getItem('highScore')) {
-
-    initials = "";
-
-    winInitials = initials;
-    winCount = correctCount;
+    var winInitials = localStorage.getItem('newPlayer');
+    var winCount = correctCount;
 
     localStorage.setItem('player', winInitials);
-    localStorage.setItem('highScore', correctCount);
+    localStorage.setItem('topScore', correctCount);
 
-    // var body = document.body;
-    // body.classList.add("body-class");
-    // body.innerHTML = "Game over, You scored " + correctCount + "." + " You have the new high score!";
+    var headEnd = document.createElement('h2');
+    headEnd.classList.add("end-title");
+    headEnd.textContent = "Game over, You scored " + winCount + "." + " You have the new high score!";;
+    contentEl.appendChild(headEnd);
+    return;
+  } else if (correctCount == localStorage.getItem('topScore')) {
+    endClear();
+
+    var headEnd = document.createElement('h2');
+    headEnd.classList.add("end-title");
+    headEnd.textContent = "You've tied for top score";;
+    contentEl.appendChild(headEnd);
   } else {
-    var body = document.body;
-    body.classList.add("body-class");
-    body.innerHTML = "Game over, You scored " + correctCount + "." + " You loose to " + localStorage.getItem('player');
+    endClear();
+
+    var headEnd = document.createElement('h2');
+    headEnd.classList.add("end-title");
+    headEnd.textContent = "Game over, You scored " + correctCount + "." + " You loose to " + localStorage.getItem('player');
+    contentEl.appendChild(headEnd);
   }
 
   // if (input) {
@@ -114,11 +133,13 @@ function renderQuestion() {
     optionListEl.append(questionListItem);
   }
 }
+
 //stopping the quiz once you reach the last question
 function nextQuestion() {
   questionIndex++;
   if (questionIndex === questions.length) {
     time = 0;
+    
   }
   renderQuestion();
 }
@@ -139,15 +160,13 @@ function checkAnswer(event) {
   setTimeout(nextQuestion, 2000);
 }
 
-
 optionListEl.addEventListener("click", checkAnswer);
 
+// winCount = "";
 
-winCount = "";
-
-function storeStart () {
-newInitials = document.getElementById("input-start");
-localStorage.setItem("playerNew", newInitials);
+function storeStart() {
+  localStorage.setItem("newPlayer", JSON.stringify(inputStart.value))
+  return;
 }
 
 
@@ -161,6 +180,11 @@ function preQuiz() {
   headStart.textContent = "Welcome to the quiz. Enter your Name and press the start button when your ready to begin";
   contentDiv.appendChild(headStart);
 
+  paraStart = document.createElement('p');
+  paraStart.classList.add("para-start");
+  paraStart.textContent = "You will have 70 seconds to comeplete this quiz. Every question wrong will take 10 seconds off your time. Goodluck.";
+  contentDiv.appendChild(paraStart);
+
   inputDiv = document.createElement('div');
   inputDiv.classList.add("input-div");
   contentDiv.append(inputDiv);
@@ -169,7 +193,6 @@ function preQuiz() {
   inputStart.setAttribute("type", "text");
   inputStart.classList.add("input-start");
   inputStart.setAttribute('id', "input-start");
-  // inputStart.textContent = "Enter Name"
   inputDiv.appendChild(inputStart);
 
   buttonDiv = document.createElement('div');
@@ -186,10 +209,12 @@ function preQuiz() {
   buttStart.addEventListener("click", renderQuestion);
   buttStart.addEventListener("click", clear);
   buttStart.addEventListener("click", storeStart);
+  
 }
 
 function clear() {
   headStart.remove();
+  paraStart.remove();
   buttStart.remove();
   inputStart.remove();
   inputDiv.remove();
