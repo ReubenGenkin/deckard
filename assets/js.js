@@ -73,8 +73,9 @@ function endQuiz() {
 
     headEnd = document.createElement('h2');
     headEnd.classList.add("end-title");
-    headEnd.textContent = "Game over, You scored " + winCount + "." + " You have the new high score!";;
+    headEnd.textContent = "Game over, You scored " + winCount + ". You have the new high score!";;
     contentEl.appendChild(headEnd);
+
     paraEnd = document.createElement('p');
     paraEnd.classList.add("para-start");
     paraEnd.textContent = "Click the button to retake the quiz";
@@ -90,7 +91,7 @@ function endQuiz() {
     endButton.addEventListener("click", clearEnd);
     endButton.addEventListener("click", preQuiz);
     return;
-    
+
   } else if (correctCount == localStorage.getItem('topScore')) {
     endClear();
 
@@ -120,7 +121,7 @@ function endQuiz() {
 
     headEnd = document.createElement('h2');
     headEnd.classList.add("end-title");
-    headEnd.textContent = "Game over, You scored " + correctCount + "." + " You loose to " + localStorage.getItem('player');
+    headEnd.textContent = "Game over, You scored " + correctCount + ". You loose to " + localStorage.getItem('player');
     contentEl.appendChild(headEnd);
 
     paraEnd = document.createElement('p');
