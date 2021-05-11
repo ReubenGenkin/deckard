@@ -50,11 +50,12 @@ var time = 70;
 var intervalId;
 
 function endClear() {
-  questionEl.remove();
-  optionListEl.remove();
-  questionResultEl.remove();
-  timerEl.remove();
-  timerTitleEl.remove();
+  questionEl.textContent = "";
+  optionListEl.textContent = "";
+  questionResultEl.textContent = "";
+  timerEl.textContent = "";
+  timerTitleEl.textContent = "";
+  return;
 }
 
 function endQuiz() {
@@ -74,8 +75,22 @@ function endQuiz() {
     headEnd.classList.add("end-title");
     headEnd.textContent = "Game over, You scored " + winCount + "." + " You have the new high score!";;
     contentEl.appendChild(headEnd);
-    return;
+    paraEnd = document.createElement('p');
+    paraEnd.classList.add("para-start");
+    paraEnd.textContent = "Click the button to retake the quiz";
+    contentEl.appendChild(paraEnd);
 
+    endButton = document.createElement('button');
+    endButton.classList.add("start-button");
+    endButton.setAttribute("id", "end-button");
+    endButton.textContent = "retake";
+    contentEl.appendChild(endButton);
+
+    restart = endButton.querySelector("#end-button");
+    endButton.addEventListener("click", clearEnd);
+    endButton.addEventListener("click", preQuiz);
+    return;
+    
   } else if (correctCount == localStorage.getItem('topScore')) {
     endClear();
 
@@ -83,6 +98,23 @@ function endQuiz() {
     headEnd.classList.add("end-title");
     headEnd.textContent = "You've tied for top score";;
     contentEl.appendChild(headEnd);
+
+    paraEnd = document.createElement('p');
+    paraEnd.classList.add("para-start");
+    paraEnd.textContent = "Click the button to retake the quiz";
+    contentEl.appendChild(paraEnd);
+
+    endButton = document.createElement('button');
+    endButton.classList.add("start-button");
+    endButton.setAttribute("id", "end-button");
+    endButton.textContent = "retake";
+    contentEl.appendChild(endButton);
+
+    restart = endButton.querySelector("#end-button");
+    endButton.addEventListener("click", clearEnd);
+    endButton.addEventListener("click", preQuiz);
+    return;
+
   } else {
     endClear();
 
@@ -105,7 +137,7 @@ function endQuiz() {
     restart = endButton.querySelector("#end-button");
     endButton.addEventListener("click", clearEnd);
     endButton.addEventListener("click", preQuiz);
-    
+    return;
   }
 }
 
@@ -113,6 +145,8 @@ function clearEnd() {
   endButton.remove();
   paraEnd.remove();
   headEnd.remove();
+  questionIndex = 0;
+  time = 70;
 }
 //stopping the quiz on timout
 function updateTime() {
@@ -178,7 +212,6 @@ function checkAnswer(event) {
 
 optionListEl.addEventListener("click", checkAnswer);
 
-// winCount = "";
 
 function storeStart() {
   localStorage.setItem("newPlayer", JSON.stringify(inputStart.value))
