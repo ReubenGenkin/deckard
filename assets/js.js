@@ -227,12 +227,12 @@ function preQuiz() {
 
   headStart = document.createElement('h2');
   headStart.classList.add("start-title");
-  headStart.textContent = "Welcome to the quiz. Enter your name and press the start button when you're ready to begin";
+  headStart.textContent = "Welcome to the quiz.";
   contentDiv.appendChild(headStart);
 
   paraStart = document.createElement('p');
   paraStart.classList.add("para-start");
-  paraStart.textContent = "You will have 70 seconds to comeplete this quiz. For every incorrect question 10 seconds will be deducted from your time. Goodluck.";
+  paraStart.textContent = " Enter your name and press the start button when you're ready to begin. You will have 70 seconds to complete this quiz. For every incorrect question 10 seconds will be deducted from your time. Goodluck.";
   contentDiv.appendChild(paraStart);
 
   inputDiv = document.createElement('div');
