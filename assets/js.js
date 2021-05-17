@@ -215,7 +215,7 @@ optionListEl.addEventListener("click", checkAnswer);
 
 
 function storeStart() {
-  localStorage.setItem("newPlayer", JSON.stringify(inputStart.value))
+  localStorage.setItem("newPlayer", JSON.stringify(inputStart.value));
   return;
 }
 
